@@ -10,6 +10,7 @@ PUBLIC_FILES = (
     "README.md",
     "LICENSE",
     "pyproject.toml",
+    "uv.lock",
     "SECURITY.md",
     "CHANGELOG.md",
     "PLAN.md",
