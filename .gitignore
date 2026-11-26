@@ -1,0 +1,16 @@
+# Baysöz Labs <baysozlabs@proton.me> — baysoz-authcodegate ignore rules
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.semgrep/
+*.sarif.json
+.coverage
+htmlcov/
+*.log
+.DS_Store

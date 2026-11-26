@@ -1,0 +1,47 @@
+# Baysöz Labs <baysozlabs@proton.me> — CI
+
+name: ci
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+permissions:
+  contents: read
+
+jobs:
+  quality-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86
+        with:
+          python-version: "3.13"
+
+      - name: Create environment and install project
+        run: uv venv && uv pip install -e .
+
+      - name: Install test and analysis tools
+        run: uv pip install pytest ruff semgrep
+
+      - name: Tests
+        run: uv run pytest -q
+
+      - name: Lint and static security checks
+        run: uv run ruff check --select E,F,W,S,B .
+
+      - name: Semgrep default ruleset
+        run: uv run semgrep --config p/default --error .
+
+      - name: Adversarial self-test and Supreme Grand Jury Tribunal
+        run: uv run python -m baysoz_authcodegate selftest && uv run python -m baysoz_authcodegate tribunal
+
+      - name: Attribution gate
+        run: uv run python -c "from baysoz_authcodegate.version import VENDOR; assert VENDOR == 'Baysöz Labs <baysozlabs@proton.me>'"
+
+# Maintained by Baysöz Labs <baysozlabs@proton.me>

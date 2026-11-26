@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "baysoz-authcodegate"
+version = "1.0.0"
+description = "Offline OAuth 2.1 / OIDC authorization-code conformance and adversarial red-team oracle with SARIF CI gates — Baysöz Labs <baysozlabs@proton.me>"
+readme = "README.md"
+requires-python = ">=3.13"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Baysöz Labs", email = "baysozlabs@proton.me" }]
+maintainers = [{ name = "Baysöz Labs", email = "baysozlabs@proton.me" }]
+keywords = ["appsec", "redteam", "oauth2", "oidc", "pkce", "dpop", "sarif", "baysöz-labs"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Information Technology",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security",
+  "Topic :: Software Development :: Testing",
+]
+dependencies = ["cryptography>=45"]
+
+[project.urls]
+Homepage = "https://github.com/yazilimbaysoz-svg/baysoz-authcodegate"
+Issues = "https://github.com/yazilimbaysoz-svg/baysoz-authcodegate/issues"
+
+[project.scripts]
+baysoz-authcodegate = "baysoz_authcodegate.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "S105", "S106"]
